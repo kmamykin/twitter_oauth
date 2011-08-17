@@ -14,6 +14,7 @@ require 'twitter_oauth/lists'
 require 'twitter_oauth/saved_searches'
 require 'twitter_oauth/spam'
 require 'twitter_oauth/geo'
+require 'twitter_oauth/errors'
 
 module TwitterOAuth
   class Client
@@ -75,19 +76,19 @@ module TwitterOAuth
       def get(path, headers={})
         headers.merge!("User-Agent" => "twitter_oauth gem v#{TwitterOAuth::VERSION}")
         oauth_response = access_token.get("/1#{path}", headers)
-        JSON.parse(oauth_response.body)
+        handle_response(oauth_response)
       end
 
       def post(path, body='', headers={})
         headers.merge!("User-Agent" => "twitter_oauth gem v#{TwitterOAuth::VERSION}")
         oauth_response = access_token.post("/1#{path}", body, headers)
-        JSON.parse(oauth_response.body)
+        handle_response(oauth_response)
       end
 
       def delete(path, headers={})
         headers.merge!("User-Agent" => "twitter_oauth gem v#{TwitterOAuth::VERSION}")
         oauth_response = access_token.delete("/1#{path}", headers)
-        JSON.parse(oauth_response.body)
+        handle_response(oauth_response)
       end
   end
 end
