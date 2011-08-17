@@ -15,6 +15,7 @@ require 'twitter_oauth/saved_searches'
 require 'twitter_oauth/spam'
 require 'twitter_oauth/geo'
 require 'twitter_oauth/errors'
+require 'twitter_oauth/rate_limiting'
 
 module TwitterOAuth
   class Client

@@ -23,6 +23,7 @@ module TwitterOAuth
   class Client
     def handle_response(response)
       body = JSON.parse(response.body)
+      update_rate_limit_from_response(response)
       case response.code.to_i
       when (200..299)
         body
