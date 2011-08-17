@@ -15,7 +15,7 @@ module TwitterOAuth
     def update_rate_limit_from_response(response)
       @hourly_limit = response["X-RateLimit-Limit"].to_i if response["X-RateLimit-Limit"]
       @remaining_hits = response["X-RateLimit-Remaining"].to_i if response["X-RateLimit-Remaining"]
-      @reset_time = Time.at(response["X-RateLimit-Reset"]) if response["X-RateLimit-Reset"]
+      @reset_time = Time.at(response["X-RateLimit-Reset"].to_i) if response["X-RateLimit-Reset"]
     end
   end
 end
